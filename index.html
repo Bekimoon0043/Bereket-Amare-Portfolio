@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bereket Amare — AI Automation Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ────────────────────────────────────────────────── */
+    :root {
+      --bg:        #080E1D;
+      --surface:   #0F1729;
+      --card:      #131E35;
+      --border:    #1E2D4A;
+      --indigo:    #4F46E5;
+      --indigo-lt: #818CF8;
+      --indigo-glow: rgba(79,70,229,0.18);
+      --amber:     #F59E0B;
+      --text:      #CBD5E1;
+      --text-dim:  #64748B;
+      --white:     #F1F5F9;
+      --mono:      'JetBrains Mono', monospace;
+      --display:   'Space Grotesk', sans-serif;
+      --body:      'Inter', sans-serif;
+      --radius:    14px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise texture overlay ──────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    /* ── NAV ───────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,14,29,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 2rem;
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.1rem; font-weight: 600; color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--indigo-lt); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ───────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 8rem 2rem 6rem;
+    }
+    /* Radial glow behind hero */
+    .hero::after {
+      content: '';
+      position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(79,70,229,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.75rem;
+      color: var(--indigo-lt); letter-spacing: 0.1em;
+      background: var(--indigo-glow); border: 1px solid rgba(129,140,248,0.2);
+      padding: 0.4rem 0.9rem; border-radius: 9999px; margin-bottom: 1.5rem;
+    }
+    .eyebrow::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700; line-height: 1.08;
+      color: var(--white); letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-title .accent { color: var(--indigo-lt); }
+
+    .hero-sub {
+      font-size: 1.05rem; color: var(--text);
+      max-width: 460px; margin-bottom: 2.5rem; line-height: 1.7;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--indigo);
+      color: #fff; font-weight: 600; font-size: 0.95rem;
+      padding: 0.875rem 2rem; border-radius: 9999px; text-decoration: none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .hero-cta:hover {
+      background: #5b52f0;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(79,70,229,0.35);
+    }
+    .hero-cta-ghost {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 1px solid var(--border); color: var(--text);
+      font-weight: 500; font-size: 0.95rem;
+      padding: 0.875rem 2rem; border-radius: 9999px; text-decoration: none;
+      margin-left: 1rem;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .hero-cta-ghost:hover { border-color: var(--indigo-lt); color: var(--white); }
+
+    /* ── TERMINAL WIDGET ─────────────────────────────────────────── */
+    .terminal {
+      background: #0A0E1A;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(79,70,229,0.08);
+    }
+    .terminal-bar {
+      background: #111827;
+      padding: 0.75rem 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FEBC2E; }
+    .dot-g { background: #28C840; }
+    .terminal-title { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); margin-left: auto; margin-right: auto; }
+    .terminal-body { padding: 1.5rem; font-family: var(--mono); font-size: 0.82rem; line-height: 1.9; min-height: 260px; }
+    .t-prompt { color: var(--indigo-lt); }
+    .t-cmd { color: var(--white); }
+    .t-ok { color: #34D399; }
+    .t-info { color: var(--text-dim); }
+    .t-amber { color: var(--amber); }
+    .cursor {
+      display: inline-block; width: 8px; height: 1em;
+      background: var(--indigo-lt); vertical-align: text-bottom;
+      animation: blink 1.1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── SECTION SHARED ─────────────────────────────────────────── */
+    .section { max-width: 1100px; margin: 0 auto; padding: 6rem 2rem; position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
+      color: var(--indigo-lt); text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--display); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700; color: var(--white); letter-spacing: -0.025em;
+      margin-bottom: 1rem; line-height: 1.15;
+    }
+    .section-sub { color: var(--text); max-width: 560px; font-size: 1.05rem; line-height: 1.7; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── ABOUT ──────────────────────────────────────────────────── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+      margin-top: 3rem;
+    }
+    .about-text { font-size: 1.05rem; line-height: 1.8; color: var(--text); }
+    .about-text p + p { margin-top: 1rem; }
+    .lang-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+    .chip {
+      font-size: 0.8rem; font-weight: 500;
+      padding: 0.4rem 0.9rem; border-radius: 9999px;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .chip.primary { background: var(--indigo-glow); border-color: rgba(129,140,248,0.3); color: var(--indigo-lt); }
+    .stat-block { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+    }
+    .stat-num {
+      font-family: var(--display); font-size: 2.4rem; font-weight: 700;
+      color: var(--white); letter-spacing: -0.04em; line-height: 1;
+    }
+    .stat-num span { color: var(--indigo-lt); }
+    .stat-label { font-size: 0.82rem; color: var(--text-dim); margin-top: 0.4rem; }
+
+    /* ── SKILLS ─────────────────────────────────────────────────── */
+    .skills-wrapper { margin-top: 3rem; }
+    .skills-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .tab-btn {
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      padding: 0.45rem 1rem; border-radius: 9999px; cursor: pointer;
+      background: var(--card); border: 1px solid var(--border); color: var(--text-dim);
+      transition: all var(--transition);
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--indigo-glow); border-color: rgba(129,140,248,0.35);
+      color: var(--indigo-lt);
+    }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .skill-pill {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem 1.25rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.875rem; color: var(--text); font-weight: 500;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .skill-pill:hover { border-color: rgba(129,140,248,0.4); transform: translateY(-2px); }
+    .skill-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+    /* ── PROJECTS ───────────────────────────────────────────────── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .project-card:hover {
+      border-color: rgba(79,70,229,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .project-banner {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; position: relative; overflow: hidden;
+    }
+    .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .project-num {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      color: var(--indigo-lt); margin-bottom: 0.5rem;
+    }
+    .project-name {
+      font-family: var(--display); font-size: 1.1rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.6rem; line-height: 1.3;
+    }
+    .project-desc { font-size: 0.875rem; color: var(--text); line-height: 1.65; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+    .tag {
+      font-family: var(--mono); font-size: 0.67rem; letter-spacing: 0.04em;
+      padding: 0.25rem 0.6rem; border-radius: 6px;
+      background: rgba(79,70,229,0.12); border: 1px solid rgba(79,70,229,0.2); color: var(--indigo-lt);
+    }
+
+    /* ── CONTACT ────────────────────────────────────────────────── */
+    .contact-wrapper {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: start; margin-top: 3rem;
+    }
+    .contact-intro { font-size: 1.05rem; line-height: 1.8; color: var(--text); }
+    .contact-intro p + p { margin-top: 1rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.25rem;
+      text-decoration: none;
+      transition: border-color var(--transition);
+    }
+    .contact-item:hover { border-color: rgba(129,140,248,0.4); }
+    .contact-item-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--indigo-glow); border: 1px solid rgba(129,140,248,0.2);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-item-label { font-size: 0.72rem; color: var(--text-dim); }
+    .contact-item-value { font-size: 0.9rem; font-weight: 500; color: var(--white); }
+
+    .availability-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.25);
+      color: #34D399; padding: 0.75rem 1.25rem; border-radius: 10px;
+      font-size: 0.875rem; font-weight: 500; margin-bottom: 2rem;
+    }
+    .availability-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border); padding: 2.5rem 2rem;
+      text-align: center; font-family: var(--mono); font-size: 0.75rem;
+      color: var(--text-dim); position: relative; z-index: 1;
+    }
+    footer span { color: var(--indigo-lt); }
+
+    /* ── HAMBURGER ──────────────────────────────────────────────── */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; gap: 1.25rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .stat-block { grid-template-columns: 1fr 1fr; }
+      .hero-cta-ghost { margin-left: 0; }
+      .hero-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .section { padding: 4rem 1.25rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ───────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Bereket <span>Amare</span></div>
+    <ul class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-inner">
+    <!-- Left: copy -->
+    <div>
+      <div class="eyebrow">Available for Projects</div>
+      <h1 class="hero-title">
+        Building AI<br>systems that<br><span class="accent">actually run.</span>
+      </h1>
+      <p class="hero-sub">
+        AI Automation Specialist &amp; Full-Stack Developer based in Addis Ababa. I design and deploy intelligent workflows with n8n, OpenAI, and Telegram — turning repetitive processes into reliable machines.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="hero-cta">See my work →</a>
+        <a href="#contact" class="hero-cta-ghost">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- Right: terminal -->
+    <div class="terminal" role="img" aria-label="Automation workflow terminal demo">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="terminal-title">workflow_runner.sh</div>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <!-- JS fills this -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ── ABOUT ───────────────────────────────────────────────────── -->
+<section class="section" id="about">
+  <div class="section-label">// who I am</div>
+  <h2 class="section-title">Self-taught, data-minded,<br>and automation-obsessed.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Bereket — a self-taught AI Automation Specialist with a BSc in Statistics. I build practical tools that save businesses hours every week: Telegram bots, n8n pipelines, Flask web apps, and AI-powered data workflows.</p>
+      <p>My background in statistics means I don't just automate — I analyse, optimise, and measure. Every workflow I ship is built to be stable, scalable, and genuinely useful to the people running it.</p>
+      <p>Based in Addis Ababa and deeply familiar with the Ethiopian business landscape, I focus on solutions that work in real local contexts — not just demos that look good on paper.</p>
+      <div class="lang-chips">
+        <span class="chip primary">🇪🇹 Amharic (Native)</span>
+        <span class="chip primary">🇪🇹 Afaan Oromo (Fluent)</span>
+        <span class="chip primary">🇬🇧 English (Professional)</span>
+      </div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-card">
+        <div class="stat-num">5<span>+</span></div>
+        <div class="stat-label">Automation projects shipped</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3<span>+</span></div>
+        <div class="stat-label">Languages supported in AI systems</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">n8n</div>
+        <div class="stat-label">Primary automation stack</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">BSc</div>
+        <div class="stat-label">Statistics — analytical foundation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── SKILLS ────────────────────────────────────────────────────── -->
+<section class="section" id="skills">
+  <div class="section-label">// what I work with</div>
+  <h2 class="section-title">Skills &amp; Tools</h2>
+  <p class="section-sub">A practical toolkit built from real project experience — not just tutorials.</p>
+  <div class="skills-wrapper">
+    <div class="skills-grid">
+      <div class="skill-pill"><span class="skill-icon">⚙️</span> n8n Automation</div>
+      <div class="skill-pill"><span class="skill-icon">🤖</span> OpenAI API</div>
+      <div class="skill-pill"><span class="skill-icon">✈️</span> Telegram Bots</div>
+      <div class="skill-pill"><span class="skill-icon">🧠</span> Prompt Engineering</div>
+      <div class="skill-pill"><span class="skill-icon">👤</span> AI Agent Development</div>
+      <div class="skill-pill"><span class="skill-icon">🐍</span> Flask (Python)</div>
+      <div class="skill-pill"><span class="skill-icon">🌐</span> HTML / CSS / JS</div>
+      <div class="skill-pill"><span class="skill-icon">📊</span> Google Sheets Automation</div>
+      <div class="skill-pill"><span class="skill-icon">📁</span> Excel Automation</div>
+      <div class="skill-pill"><span class="skill-icon">📈</span> Data Analysis</div>
+      <div class="skill-pill"><span class="skill-icon">🔗</span> API Integrations</div>
+      <div class="skill-pill"><span class="skill-icon">🐙</span> GitHub</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── PROJECTS ────────────────────────────────────────────────── -->
+<section class="section" id="projects">
+  <div class="section-label">// what I've built</div>
+  <h2 class="section-title">Featured Projects</h2>
+  <p class="section-sub">Real tools, deployed for real use cases — mostly in the Ethiopian market.</p>
+
+  <div class="projects-grid">
+
+    <!-- 01 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);">🌐</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 01</div>
+        <div class="project-name">AI-Powered Translation System</div>
+        <p class="project-desc">Built multilingual AI translation workflows supporting Amharic, Afaan Oromo, and English — deployed via Telegram bots for instant conversational access. Bridging language barriers for Ethiopian users at scale.</p>
+        <div class="project-tags">
+          <span class="tag">n8n</span>
+          <span class="tag">OpenAI API</span>
+          <span class="tag">Telegram Bot</span>
+          <span class="tag">Amharic</span>
+          <span class="tag">Afaan Oromo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#1a2e05 0%,#1e3a2f 100%);">📚</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 02</div>
+        <div class="project-name">English Teacher Bot</div>
+        <p class="project-desc">An n8n-powered Telegram chatbot that teaches English to Amharic-speaking learners. Handles vocabulary, grammar exercises, and conversational practice — all delivered conversationally through Telegram, no app download required.</p>
+        <div class="project-tags">
+          <span class="tag">n8n</span>
+          <span class="tag">Telegram Bot</span>
+          <span class="tag">OpenAI API</span>
+          <span class="tag">Ed-Tech</span>
+          <span class="tag">Amharic</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#1c1917 0%,#292524 100%);">🏨</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 03</div>
+        <div class="project-name">Hotel Management System</div>
+        <p class="project-desc">A Flask web application handling room availability, booking logic, pricing management, and an admin dashboard — built for real hospitality use cases in the Ethiopian market.</p>
+        <div class="project-tags">
+          <span class="tag">Flask</span>
+          <span class="tag">Python</span>
+          <span class="tag">SQLAlchemy</span>
+          <span class="tag">Bootstrap 5</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#1e0936 0%,#2d1056 100%);">📱</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 04</div>
+        <div class="project-name">Social Media Content Automation</div>
+        <p class="project-desc">End-to-end n8n workflows that identify trending videos, translate content for local audiences, and automate social publishing — cutting hours of manual content work down to a single trigger.</p>
+        <div class="project-tags">
+          <span class="tag">n8n</span>
+          <span class="tag">OpenAI API</span>
+          <span class="tag">Video Translation</span>
+          <span class="tag">Social Media APIs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#1a1207 0%,#2d1e09 100%);">📸</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 05</div>
+        <div class="project-name">Instagram Post Generation Workflow</div>
+        <p class="project-desc">An AI-powered pipeline that generates branded Instagram post copy and captions on-demand — connected to a scheduling layer so content goes out without a human touching it.</p>
+        <div class="project-tags">
+          <span class="tag">n8n</span>
+          <span class="tag">OpenAI API</span>
+          <span class="tag">Instagram API</span>
+          <span class="tag">Content Automation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── CONTACT ────────────────────────────────────────────────── -->
+<section class="section" id="contact">
+  <div class="section-label">// let's work together</div>
+  <h2 class="section-title">Get In Touch</h2>
+
+  <div class="contact-wrapper">
+    <div class="contact-intro">
+      <div class="availability-badge">Open to new projects</div>
+      <p>If you need an automation that saves your team time, a Telegram bot for your business, or a data-driven web app — let's talk.</p>
+      <p>I'm especially interested in projects that serve the Ethiopian market, AI-assisted tools for education or commerce, and n8n workflow builds for growing businesses.</p>
+      <p style="margin-top:1rem; font-size:0.9rem; color:var(--text-dim);">Response time: usually within 24 hours.</p>
+    </div>
+
+    <div>
+      <div class="contact-links">
+        <a class="contact-item" href="mailto:bereketamare0043@gmail.com">
+          <div class="contact-item-icon">✉️</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">bereketamare0043@gmail.com</div>
+          </div>
+        </a>
+        <a class="contact-item" href="tel:+251978494843">
+          <div class="contact-item-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Phone / WhatsApp</div>
+            <div class="contact-item-value">+251 978 494 843</div>
+          </div>
+        </a>
+        <div class="contact-item" style="cursor:default;">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">Addis Ababa, Ethiopia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <p>© 2026 <span>Bereket Amare</span> — Built with automation &amp; intention.</p>
+</footer>
+
+<!-- ── JS ─────────────────────────────────────────────────────── -->
+<script>
+  /* ── Hamburger ── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  hamburger.addEventListener('keydown', e => { if (e.key === 'Enter') navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  /* ── Terminal typewriter ── */
+  const lines = [
+    { text: '$ bereket run translate-bot --lang=am,or,en', type: 'cmd', delay: 0 },
+    { text: '✓ Connecting to n8n webhook...', type: 'ok', delay: 700 },
+    { text: '✓ OpenAI GPT-4o model loaded', type: 'ok', delay: 1300 },
+    { text: '⊹ Listening on Telegram channel...', type: 'info', delay: 1900 },
+    { text: '', type: 'blank', delay: 2500 },
+    { text: '$ bereket run english-teacher-bot', type: 'cmd', delay: 2700 },
+    { text: '✓ Lesson engine initialised', type: 'ok', delay: 3300 },
+    { text: '✓ 1,200 vocab items indexed', type: 'ok', delay: 3800 },
+    { text: '⊹ Ready. Awaiting student input...', type: 'info', delay: 4300 },
+    { text: '', type: 'blank', delay: 4800 },
+    { text: '$ bereket run instagram-gen --schedule', type: 'cmd', delay: 5000 },
+    { text: '✓ Content pipeline active', type: 'ok', delay: 5600 },
+    { text: '⊹ Next post drops in 03:42:17', type: 'amber', delay: 6100 },
+  ];
+
+  const body = document.getElementById('terminalBody');
+  let idx = 0;
+
+  function addLine(line) {
+    const div = document.createElement('div');
+    let cls = 't-info';
+    if (line.type === 'cmd')   cls = 't-cmd';
+    if (line.type === 'ok')    cls = 't-ok';
+    if (line.type === 'amber') cls = 't-amber';
+    if (line.type === 'blank') { body.appendChild(div); return; }
+    div.className = cls;
+    if (line.type === 'cmd') {
+      div.innerHTML = '<span class="t-prompt">❯ </span>';
+    }
+    div.innerHTML += line.text.replace(/^\$ /, '').replace(/^[✓⊹] /, m => `<span class="t-info">${m}</span>`);
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  // Add cursor placeholder
+  const cursorDiv = document.createElement('div');
+  cursorDiv.innerHTML = '<span class="t-prompt">❯ </span><span class="cursor"></span>';
+  body.appendChild(cursorDiv);
+
+  function tick() {
+    if (idx >= lines.length) return;
+    const line = lines[idx];
+    setTimeout(() => {
+      body.removeChild(cursorDiv);
+      addLine(line);
+      body.appendChild(cursorDiv);
+      body.scrollTop = body.scrollHeight;
+      idx++;
+      tick();
+    }, idx === 0 ? line.delay + 600 : lines[idx].delay - lines[idx - 1].delay);
+  }
+
+  // Start after short pause
+  setTimeout(tick, 400);
+</script>
+</body>
+</html>
