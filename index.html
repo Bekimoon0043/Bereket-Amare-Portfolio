@@ -261,6 +261,8 @@
       font-family: var(--display); font-size: 1.1rem; font-weight: 600;
       color: var(--white); margin-bottom: 0.6rem; line-height: 1.3;
     }
+    .project-name a { color: inherit; text-decoration: none; }
+    .project-name a:hover { color: var(--indigo-lt); }
     .project-desc { font-size: 0.875rem; color: var(--text); line-height: 1.65; flex: 1; }
     .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
     .tag {
@@ -405,8 +407,8 @@
     </div>
     <div class="stat-block">
       <div class="stat-card">
-        <div class="stat-num">5<span>+</span></div>
-        <div class="stat-label">Automation projects shipped</div>
+        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-label">Public builds and experiments</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">3<span>+</span></div>
@@ -455,7 +457,7 @@
 <section class="section" id="projects">
   <div class="section-label">// what I've built</div>
   <h2 class="section-title">Featured Projects</h2>
-  <p class="section-sub">Real tools, deployed for real use cases — mostly in the Ethiopian market.</p>
+  <p class="section-sub">Selected builds across AI, automation, cybersecurity, games, and product platforms — with source code available on GitHub where applicable.</p>
 
   <div class="projects-grid">
 
@@ -464,7 +466,7 @@
       <div class="project-banner" style="background: linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);">🌐</div>
       <div class="project-body">
         <div class="project-num">PROJECT 01</div>
-        <div class="project-name">AI-Powered Translation System</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/transleter" target="_blank" rel="noreferrer">AI-Powered Translation System ↗</a></div>
         <p class="project-desc">Built multilingual AI translation workflows supporting Amharic, Afaan Oromo, and English — deployed via Telegram bots for instant conversational access. Bridging language barriers for Ethiopian users at scale.</p>
         <div class="project-tags">
           <span class="tag">n8n</span>
@@ -481,8 +483,8 @@
       <div class="project-banner" style="background: linear-gradient(135deg,#1a2e05 0%,#1e3a2f 100%);">📚</div>
       <div class="project-body">
         <div class="project-num">PROJECT 02</div>
-        <div class="project-name">English Teacher Bot</div>
-        <p class="project-desc">An n8n-powered Telegram chatbot that teaches English to Amharic-speaking learners. Handles vocabulary, grammar exercises, and conversational practice — all delivered conversationally through Telegram, no app download required.</p>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/English_teacher_backend" target="_blank" rel="noreferrer">English Teacher Bot ↗</a></div>
+        <p class="project-desc">An n8n-powered Telegram chatbot that teaches English to Amharic-speaking learners. Handles vocabulary, grammar exercises, and conversational practice — all delivered conversationally through Telegram, with no app download required.</p>
         <div class="project-tags">
           <span class="tag">n8n</span>
           <span class="tag">Telegram Bot</span>
@@ -498,7 +500,7 @@
       <div class="project-banner" style="background: linear-gradient(135deg,#1c1917 0%,#292524 100%);">🏨</div>
       <div class="project-body">
         <div class="project-num">PROJECT 03</div>
-        <div class="project-name">Hotel Management System</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/telegram-hotel" target="_blank" rel="noreferrer">Hotel Management System ↗</a></div>
         <p class="project-desc">A Flask web application handling room availability, booking logic, pricing management, and an admin dashboard — built for real hospitality use cases in the Ethiopian market.</p>
         <div class="project-tags">
           <span class="tag">Flask</span>
@@ -514,13 +516,13 @@
       <div class="project-banner" style="background: linear-gradient(135deg,#1e0936 0%,#2d1056 100%);">📱</div>
       <div class="project-body">
         <div class="project-num">PROJECT 04</div>
-        <div class="project-name">Social Media Content Automation</div>
-        <p class="project-desc">End-to-end n8n workflows that identify trending videos, translate content for local audiences, and automate social publishing — cutting hours of manual content work down to a single trigger.</p>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/tiktok-monitor-beki" target="_blank" rel="noreferrer">Social Media Content Automation ↗</a></div>
+        <p class="project-desc">End-to-end automation for monitoring new TikTok videos and sending Telegram notifications, forming a practical foundation for trend-aware content workflows.</p>
         <div class="project-tags">
-          <span class="tag">n8n</span>
-          <span class="tag">OpenAI API</span>
-          <span class="tag">Video Translation</span>
-          <span class="tag">Social Media APIs</span>
+          <span class="tag">Python</span>
+          <span class="tag">Telegram Bot</span>
+          <span class="tag">TikTok Monitoring</span>
+          <span class="tag">Automation</span>
         </div>
       </div>
     </div>
@@ -537,6 +539,133 @@
           <span class="tag">OpenAI API</span>
           <span class="tag">Instagram API</span>
           <span class="tag">Content Automation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 · THESIS -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#082f49 0%,#0f766e 100%);">🛡️</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 06 · THESIS</div>
+        <div class="project-name">Web-Based Cyber Attack Detection &amp; Monitoring</div>
+        <p class="project-desc">Co-developed a real-time web security tool that extracts 26 HTTP-request features, uses an Isolation Forest model to flag suspicious traffic, and presents alerts in a PHP/MySQL dashboard with Telegram notifications, an AI security assistant, IP controls, and two-factor authentication. The thesis reports 95.25% average detection across four attack categories, a 2% false-positive rate, and approximately 18 ms processing latency.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Isolation Forest</span>
+          <span class="tag">PHP/MySQL</span>
+          <span class="tag">Cybersecurity</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#431407 0%,#9a3412 100%);">🎟️</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 07</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/keno-files" target="_blank" rel="noreferrer">Keno Lottery Platform ↗</a></div>
+        <p class="project-desc">A lottery product with a Telegram mini-app for players, an admin dashboard, and a mockup sandbox. The repository includes React/Vite frontends and a live-service layer for the product workflow.</p>
+        <div class="project-tags">
+          <span class="tag">React</span>
+          <span class="tag">Vite</span>
+          <span class="tag">Telegram Mini App</span>
+          <span class="tag">Admin Dashboard</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#172554 0%,#1d4ed8 100%);">🏆</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 08</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/howlow-auction" target="_blank" rel="noreferrer">HowLow Auction Platform ↗</a></div>
+        <p class="project-desc">A production-oriented lowest-unique-bid auction platform for the Ethiopian market, designed around ETB pricing, phone-only authentication, Supabase data services, and Telegram-based deposit workflows.</p>
+        <div class="project-tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">ETB</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#312e81 0%,#7c3aed 100%);">♟️</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 09</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/AI-Chess" target="_blank" rel="noreferrer">AI Chess with Memory ↗</a></div>
+        <p class="project-desc">An AI chess project that explores a persistent memory layer so gameplay can become more contextual over time instead of treating every interaction as an isolated match.</p>
+        <div class="project-tags">
+          <span class="tag">AI</span>
+          <span class="tag">Chess</span>
+          <span class="tag">Memory Systems</span>
+          <span class="tag">Game Development</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#052e16 0%,#166534 100%);">🎬</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 10</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/Media-Toolbox-HF" target="_blank" rel="noreferrer">Media Toolbox ↗</a></div>
+        <p class="project-desc">A media-processing toolbox combining FFmpeg and Whisper, packaged for deployment to Hugging Face Spaces. It brings audio/video conversion and transcription into a single web-facing workflow.</p>
+        <div class="project-tags">
+          <span class="tag">FFmpeg</span>
+          <span class="tag">Whisper</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Hugging Face</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#3f0d12 0%,#7f1d1d 100%);">🎲</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 11</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/mini-ludo-telegram-bot" target="_blank" rel="noreferrer">Mini Ludo Telegram Bot ↗</a></div>
+        <p class="project-desc">A compact social game experience built with Next.js and designed for Telegram delivery, demonstrating how lightweight game interactions can be packaged for fast access and deployment.</p>
+        <div class="project-tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">Telegram Bot</span>
+          <span class="tag">Vercel</span>
+          <span class="tag">Game Development</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#083344 0%,#155e75 100%);">📻</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 12</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/Ethio-radio-station-" target="_blank" rel="noreferrer">Ethio Radio Station ↗</a></div>
+        <p class="project-desc">A radio streaming website focused on making Ethiopian audio content accessible through a simple web interface and a clear, lightweight listening experience.</p>
+        <div class="project-tags">
+          <span class="tag">Web App</span>
+          <span class="tag">Audio Streaming</span>
+          <span class="tag">Ethiopian Media</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg,#422006 0%,#b45309 100%);">🎫</div>
+      <div class="project-body">
+        <div class="project-num">PROJECT 13</div>
+        <div class="project-name"><a href="https://github.com/Bekimoon0043/Ras-hotel-cinema-harar" target="_blank" rel="noreferrer">Ras Hotel &amp; Cinema Ticketing ↗</a></div>
+        <p class="project-desc">An online ticket-booking project for a local hotel and cinema context, extending the portfolio into practical reservation and customer-access workflows.</p>
+        <div class="project-tags">
+          <span class="tag">Online Booking</span>
+          <span class="tag">Hospitality</span>
+          <span class="tag">Ticketing</span>
         </div>
       </div>
     </div>
